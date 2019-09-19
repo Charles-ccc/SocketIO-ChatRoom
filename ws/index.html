@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WS</title>
+</head>
+<body>
+  <div id="txt"></div>
+</body>
+  <script>
+    let $txt = document.querySelector('#txt')
+    let ws = new WebSocket('ws://localhost:9999')  // 服务端设置端口号
+    // onopen是客户端与服务端建立连接后触发
+    ws.onopen = function() {
+      ws.send("Hi，这里是客户端")
+    }
+    // onmessage是当服务端给客户端发来消息的时候触发
+    ws.onmessage = function(res) {
+      console.log(res)
+      // 给DOM赋值
+      $txt.innerHTML = res.data
+    }
+  </script>
+</html>
